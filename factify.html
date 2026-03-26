@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Factify Secrets Tamil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background:#020617; color:white; overflow-x:hidden; }
+    header { background: linear-gradient(135deg,#6366f1,#ec4899); padding:30px; text-align:center; }
+    header h1 { font-size:2.8rem; }
+    header p { opacity:0.9; }
+
+    nav { display:flex; justify-content:center; gap:25px; background:#020617; padding:12px; border-bottom:1px solid #1e293b; }
+    nav a { color:white; text-decoration:none; font-weight:500; }
+    nav a:hover { color:#ec4899; }
+
+    .hero { text-align:center; padding:80px 20px; animation:fadeIn 2s ease; }
+    .hero h2 { font-size:2.5rem; }
+    .hero p { margin-top:10px; opacity:0.8; }
+    .btn { margin-top:25px; display:inline-block; padding:14px 30px; background:#ec4899; border-radius:30px; text-decoration:none; color:white; transition:0.3s; }
+    .btn:hover { background:#be185d; transform:scale(1.05); }
+
+    .stats { display:flex; justify-content:center; gap:50px; padding:40px; text-align:center; }
+    .stat h3 { font-size:2rem; color:#ec4899; }
+
+    .videos { padding:50px 20px; }
+    .videos h2 { text-align:center; margin-bottom:30px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+    iframe { width:100%; height:220px; border-radius:15px; border:none; }
+
+    .social { text-align:center; padding:40px; }
+    .social a { margin:10px; display:inline-block; padding:12px 20px; border-radius:25px; background:#1e293b; text-decoration:none; color:white; }
+    .social a:hover { background:#ec4899; }
+
+    footer { text-align:center; padding:20px; background:black; margin-top:40px; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Factify Secrets Tamil</h1>
+  <p>Discover amazing facts and viral content in Tamil!</p>
+</header>
+
+<nav>
+  <a href="index.html">Shamintha Vlogs</a>
+  <a href="#">Factify Secrets Tamil</a>
+  <a href="#social">Social</a>
+</nav>
+
+<section class="hero">
+  <h2>Welcome to Factify Secrets Tamil 🌟</h2>
+  <p>Latest viral facts, mysteries & secrets in Tamil</p>
+  <a class="btn" href="https://www.youtube.com/@FactifySecretsTamil" target="_blank">Subscribe Now</a>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <h3 id="subs">0</h3>
+    <p>Subscribers</p>
+  </div>
+  <div class="stat">
+    <h3 id="views">0</h3>
+    <p>Total Views</p>
+  </div>
+</section>
+
+<section class="videos" id="videos">
+  <h2>Latest Videos</h2>
+  <div class="grid" id="videoGrid">
+    <!-- YouTube videos auto load here -->
+  </div>
+</section>
+
+<section class="social" id="social">
+  <h2>Follow Me</h2>
+  <a href="https://www.instagram.com/starkshamintha?igsh=MXB5Z3p3cjhmMHh1OQ==" target="_blank">Instagram</a>
+  <a href="https://www.tiktok.com/@mr.shamintha?_r=1&_t=ZS-950piWzxXvz" target="_blank">TikTok</a>
+  <a href="https://www.facebook.com/share/1DW7ruyDJN/" target="_blank">Facebook</a>
+  <a href="https://www.youtube.com/@FactifySecretsTamil" target="_blank">YouTube</a>
+</section>
+
+<footer>
+  <p>© 2026 Factify Secrets Tamil | Powered by Jawas 🚀</p>
+</footer>
+
+<script>
+const API_KEY = 'AIzaSyCeK2X-wyL7w32kC7t5rw1j24lmMyWZkP0';
+const CHANNEL_ID = 'UCaKIs6UAULf43U88Ex68RCw';
+
+// Fetch channel stats
+axios.get(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`)
+.then(res => {
+  document.getElementById('subs').innerText = res.data.items[0].statistics.subscriberCount;
+  document.getElementById('views').innerText = res.data.items[0].statistics.viewCount;
+})
+.catch(err => console.log(err));
+
+// Fetch latest 6 videos
+axios.get(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6`)
+.then(res => {
+  const grid = document.getElementById('videoGrid');
+  res.data.items.forEach(video => {
+    if(video.id.videoId){
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${video.id.videoId}`;
+      grid.appendChild(iframe);
+    }
+  });
+})
+.catch(err => console.log(err));
+</script>
+
+</body>
+</html>
