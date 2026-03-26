@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shamintha Vlog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.6.2/dist/countUp.umd.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #020617; color: white; overflow-x: hidden; }
+
+    header {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      padding: 30px;
+      text-align: center;
+    }
+    header h1 { font-size: 2.8rem; }
+    header p { opacity: 0.9; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      background: #020617;
+      padding: 12px;
+      border-bottom: 1px solid #1e293b;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover { color: #ec4899; }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      animation: fadeIn 2s ease;
+    }
+    .hero h2 { font-size: 2.5rem; }
+    .hero p { margin-top: 10px; opacity: 0.8; }
+
+    .btn {
+      margin-top: 25px;
+      display: inline-block;
+      padding: 14px 30px;
+      background: #ec4899;
+      border-radius: 30px;
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #be185d; transform: scale(1.05); }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      padding: 40px;
+      text-align: center;
+    }
+    .stat h3 { font-size: 2rem; color: #ec4899; }
+
+    .videos {
+      padding: 50px 20px;
+    }
+    .videos h2 { text-align: center; margin-bottom: 30px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 220px;
+      border-radius: 15px;
+      border: none;
+    }
+
+    .social {
+      text-align: center;
+      padding: 40px;
+    }
+    .social a {
+      margin: 10px;
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 25px;
+      background: #1e293b;
+      text-decoration: none;
+      color: white;
+    }
+    .social a:hover { background: #ec4899; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: black;
+      margin-top: 40px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Shamintha Vlog</h1>
+  <p>Real Life. Real Stories. Viral Moments.</p>
+</header>
+
+<nav>
+  <a href="#">Home</a>
+  <a href="#videos">Videos</a>
+  <a href="#social">Social</a>
+  <a href="https://youtube.com/@shaminthavlog" target="_blank">YouTube</a>
+</nav>
+
+<section class="hero">
+  <h2>Welcome to My World 🌍</h2>
+  <p>Daily Vlogs | Challenges | Real Life Content</p>
+  <a class="btn" href="https://youtube.com/@shaminthavlog" target="_blank">Subscribe Now</a>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <h3 id="subs">0</h3>
+    <p>Subscribers</p>
+  </div>
+  <div class="stat">
+    <h3 id="views">0</h3>
+    <p>Total Views</p>
+  </div>
+</section>
+
+<section class="videos" id="videos">
+  <h2>Latest Videos</h2>
+  <div class="grid">
+    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=shaminthavlog"></iframe>
+    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=shaminthavlog"></iframe>
+    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=shaminthavlog"></iframe>
+  </div>
+</section>
+
+<section class="social" id="social">
+  <h2>Follow Me</h2>
+  <a href="#">Instagram</a>
+  <a href="#">TikTok</a>
+  <a href="https://youtube.com/@shaminthavlog" target="_blank">YouTube</a>
+</section>
+
+<footer>
+  <p>© 2026 Shamintha Vlog | Powered by Jawas 🚀</p>
+</footer>
+
+<script>
+  const subs = new countUp.CountUp('subs', 1000);
+  const views = new countUp.CountUp('views', 50000);
+  subs.start();
+  views.start();
+</script>
+
+</body>
+</html>
