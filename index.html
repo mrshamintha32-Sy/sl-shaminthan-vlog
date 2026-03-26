@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shamintha Vlog</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.6.2/dist/countUp.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background: #020617; color: white; overflow-x: hidden; }
@@ -141,17 +141,16 @@
 
 <section class="videos" id="videos">
   <h2>Latest Videos</h2>
-  <div class="grid">
-    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=shaminthavlog"></iframe>
-    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=shaminthavlog"></iframe>
-    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=shaminthavlog"></iframe>
+  <div class="grid" id="videoGrid">
+    <!-- YouTube videos will load here -->
   </div>
 </section>
 
 <section class="social" id="social">
   <h2>Follow Me</h2>
-  <a href="#">Instagram</a>
-  <a href="#">TikTok</a>
+  <a href="https://www.instagram.com/starkshamintha?igsh=MXB5Z3p3cjhmMHh1OQ==" target="_blank">Instagram</a>
+  <a href="https://www.tiktok.com/@mr.shamintha?_r=1&_t=ZS-950piWzxXvz" target="_blank">TikTok</a>
+  <a href="https://www.facebook.com/share/1DW7ruyDJN/" target="_blank">Facebook</a>
   <a href="https://youtube.com/@shaminthavlog" target="_blank">YouTube</a>
 </section>
 
@@ -160,10 +159,29 @@
 </footer>
 
 <script>
-  const subs = new countUp.CountUp('subs', 1000);
-  const views = new countUp.CountUp('views', 50000);
-  subs.start();
-  views.start();
+const API_KEY = 'AIzaSyCwqmotT4y6mfXvVWCbqiPUzXt5bwz1GEc';
+const CHANNEL_ID = 'UC18h8bhY0NEeUoPBb3qzfqA';
+
+// Fetch channel statistics
+axios.get(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`)
+  .then(res => {
+    document.getElementById('subs').innerText = res.data.items[0].statistics.subscriberCount;
+    document.getElementById('views').innerText = res.data.items[0].statistics.viewCount;
+  })
+  .catch(err => console.log(err));
+
+// Fetch latest videos
+axios.get(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6`)
+  .then(res => {
+    const grid = document.getElementById('videoGrid');
+    res.data.items.forEach(video => {
+      if(video.id.videoId){
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${video.id.videoId}`;
+        grid.appendChild(iframe);
+      }
+    });
+  });
 </script>
 
 </body>
